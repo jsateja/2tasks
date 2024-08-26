@@ -3,7 +3,7 @@ This setup serves as an example. It is too complex in some places for a reason.
 
 
 ## Architecture
-![alt text](https://github.com/[jsateja]/[2tasks]/blob/[main]/architecture.png?raw=true)
+![Architecture](https://github.com/jsateja/2tasks/blob/main/architecture.png?raw=true)
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
