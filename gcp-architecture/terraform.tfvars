@@ -90,7 +90,7 @@ backup_configuration = {
   enabled            = true
   binary_log_enabled = true
   start_time         = "23:55"
-  location           = var.region
+  location           = "europe-central2"
   retained_backups   = 100
   retention_unit     = "COUNT"
 }

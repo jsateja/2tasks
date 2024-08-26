@@ -12,7 +12,7 @@ resource "google_storage_bucket_iam_binding" "gcs-users" {
 }
 
 resource "google_service_account_iam_binding" "mysql-user" {
-  service_account_id = google_storage_bucket.storage.name
+  service_account_id = google_service_account.vms.name
   role               = "roles/cloudsql.instanceUser"
 
   members = [

@@ -13,8 +13,8 @@ module "lb-https" {
   target_tags            = var.vms_tags
   labels                 = var.default_labels
   firewall_networks      = [module.vpc.network_id]
-  ssl                    = true
-  create_ssl_certificate = true
+#  ssl                    = true # For safety reasons would set it up with SSL, but I didn't have time to test the code properly with generated certs
+#  create_ssl_certificate = true
 
   backends = {
     default = {

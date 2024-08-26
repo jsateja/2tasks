@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  # strategy:
+   #  type : RollingUpdate  #TBH RollingUpdate is a default value for the strategy so I don't want to define it
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Chart.Name }}
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: "/app/config.json"
+          subPath: "config.json"
+          name: config-volume
+        - mountPath: "/etc/secrets"
+          readOnly: true
+          name: secret-volume
+      volumes:
+      - name: config-volume
+        configMap:
+          name: {{ .Chart.Name }}-configmap
+      - name: secret-volume
+        secret:
+          secretName: {{ .Chart.Name }}

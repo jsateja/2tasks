@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}-replicaset
+spec:
+  # modify replicas according to your case
+  replicas: { .Values.replicaSet.replicas }
+  selector:
+    matchLabels:
+      tier: replicaset-demo
+  template:
+    metadata:
+      labels:
+        tier: replicaset-demo
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - conatinerPort: 8080
+        - conatinerPort: 8081
+        - containerPort: 8082
+        resources: {{ toYaml .Values.replicaSet.resources | nindent 10 }}
+        livenessProbe: {{ toYaml .Values.replicaSet.livenessProbe | nindent 10 }}
+        command: ["java"]
+        args: {{ .Values.replicaSet.commandArgs }}
+        lifecycle:
+          preStop:
+            exec:
+              command:
+                - "sh"
+                - "-c"
+                - "wget http://localhost:8080/ /service/shutdown"
+        env:
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+            # optional solution is to use POD_IP env var that is created alongside this object

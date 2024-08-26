@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}-configmap
+data:
+  random.json: |
+    {
+      "id": 12345,
+      "name": "random_data",
+      "value": "some_random_value"
+    }
