@@ -3,7 +3,7 @@ This setup serves as an example. It is too complex in some places for a reason.
 
 
 ## Architecture
-![](../../../../var/folders/l4/81ywq76x0sn6lys75fl0pv540000gq/T/TemporaryItems/NSIRD_screencaptureui_83TIno/Screenshot 2024-08-26 at 18.44.18.png)
+![alt text](https://github.com/[jsateja]/[2tasks]/blob/[main]/architecture.png?raw=true)
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
