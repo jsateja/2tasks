@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: demo-app
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+      - cluster: dev-global-cluster-0
+        url: https://kubernetes.dev.example.com
+        valuesFile: values-dev.yaml
+      - cluster: prd-global-cluster-5
+        url: https://kubernetes.prod.example.com
+        valuesFile: values-prod.yaml
+  template:
+    metadata:
+      name: '{{.cluster}}-demo-app'
+    spec:
+      project: "project"
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
+      sources:
+      - repoURL: "git@github.com:jsateja/2tasks.git"
+        targetRevision: HEAD
+        ref: values
+      - repoURL: regustry-app.io/demo-app
+        chart: demo-app
+        targetRevision: 1.0.0
+        helm:
+          valueFiles:
+            - '$values/{{.valuesFile }}'
+      destination:
+        server: '{{.url}}'
+        namespace: demo
+
+
+

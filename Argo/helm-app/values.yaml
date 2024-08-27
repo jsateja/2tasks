@@ -1,3 +1,5 @@
+imagePullPolicy: IfNotPresent
+
 deployment:
   replicas: 2
 
@@ -37,6 +39,7 @@ service:
       targetPort: 8082
 
 ingress:
+  host: "dummy"
   appPaths:
     - path: "/api"
       port: 8080

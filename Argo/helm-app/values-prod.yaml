@@ -1,0 +1,15 @@
+deployment:
+  replicas: 10
+
+replicaSet:
+  resources:
+    requests:
+      cpu: 300m
+      memory: 256Mi
+    limits:
+      memory: 1024Mi
+
+  commandArgs: "-spring.profiles.active=prd"
+
+ingress:
+  host: "demo.com"

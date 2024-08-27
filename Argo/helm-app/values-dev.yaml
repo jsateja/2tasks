@@ -1,0 +1,5 @@
+ingress:
+  host: "dev-demo.com"
+
+replicaSet:
+  commandArgs: "--spring.profiles.active=dev"

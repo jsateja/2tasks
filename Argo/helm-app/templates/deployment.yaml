@@ -9,7 +9,7 @@ metadata:
 spec:
   replicas: {{ .Values.deployment.replicas }}
   # strategy:
-   #  type : RollingUpdate  #TBH RollingUpdate is a default value for the strategy so I don't want to define it
+   #  type : RollingUpdate  #TBH RollingUpdate is a default value for the strategy so there's no point to define it, but I put it as a comment due to the task
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ .Chart.Name }}
@@ -20,7 +20,8 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.14.2
+        image: nginx:1.14.2 # ofc it can be parametrized with values like this {{ .Values.imageRepo }}/{{ .Values.image.name }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
         ports:
         - containerPort: 80
         volumeMounts:
