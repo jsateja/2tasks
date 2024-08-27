@@ -1,6 +1,8 @@
 ## Description
 This setup serves as an example. It is too complex in some places for a reason. 
 
+CI/CD part is omitted here, because main focus is on the cloud infrastructure.
+
 
 ## Architecture
 ![Architecture](https://github.com/jsateja/2tasks/blob/main/gcp-architecture/architecture.png?raw=true)
